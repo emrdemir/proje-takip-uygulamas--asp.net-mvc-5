@@ -1,0 +1,70 @@
+﻿@model List<ProjeTakipWebApp.Models.ProjeTakip.PersonelProjeleri>
+
+@{
+    ViewBag.Title = "PersoneleAitProjeler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PersoneleAitProjeler</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjeBaslik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjeAciklama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OlusturmaTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OncelikDurumu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TamamlanmaOrani)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TamamlanmaTarihi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TamamlanmaDurumu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjeBaslik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjeAciklama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OlusturmaTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OncelikDurumu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TamamlanmaOrani)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TamamlanmaTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TamamlanmaDurumu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PersonelProjeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PersonelProjeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PersonelProjeId })
+        </td>
+    </tr>
+}
+
+</table>

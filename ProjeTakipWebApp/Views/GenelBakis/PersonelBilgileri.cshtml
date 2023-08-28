@@ -1,0 +1,23 @@
+﻿@model List<ProjeTakipWebApp.Models.Personel.PersonelBilgileri>
+
+<table>
+    <thead>
+        <tr>
+            <th>Personel Adı</th>
+            <th>Tamamlanan Proje Sayısı</th>
+            <th>Tamamlanmayan Proje Sayısı</th>
+            <th>Toplam Proje Sayısı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.AdSoyad</td>
+                <td>@ViewBag.TamamlananProjeSayisi[personel.PersonelBilgileriId]</td>
+                <td>@ViewBag.TamamlanmayanProjeSayisi[personel.PersonelBilgileriId]</td>
+                <td>@ViewBag.ToplamProjeSayisi[personel.PersonelBilgileriId]</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "TamamalanmamisOncelikGruplari";
+    Layout = null;
+}
+
+
+
+
+<div class="col-md-12">
+
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title"><b>TAMAMLANMAMIŞ ÖNCELİK GRUP DAĞILIMI</b></h3>
+        </div>
+
+        <!-- /.card-header -->
+        <div class="card-body">
+
+
+
+
+
+            <div id="PieTamamlanmamisOncelikchart_div"></div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("VisualizeTamamlanmayanDurumruplari", "ProjeRaporlari")',
+                success: function (result) {
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+                    google.charts.setOnLoadCallback(function () {
+                        drawTamamlanmamisOncelikChart(result);
+                    });
+                }
+            });
+        });
+    function drawTamamlanmamisOncelikChart(result) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Öncelik');
+            data.addColumn('number', 'Proje Adı');
+            var dataArray = [];
+            $.each(result, function (i, obj) {
+                dataArray.push([obj.onceliktipi, obj.oncelikadeti]);
+            });
+            data.addRows(dataArray);
+            var mycolumnChartOptions = {
+              /*  title: "Ürün - Stok Grafiği",*/
+                width: "100%",
+                height: 320,
+                pieHole: 0.4,
+                bar: { groupWidth: "100%" },
+            };
+            var mycolumnChart = new google.visualization.PieChart(document
+                .getElementById('PieTamamlanmamisOncelikchart_div'));
+
+            mycolumnChart.draw(data, mycolumnChartOptions);
+        }
+</script>
+

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<ProjeTakipWebApp.Models.Personel.PersonelBilgileri>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/rg-1.0.0/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/rg-1.0.0/datatables.min.js"></script>
+<div class="card">
+    <h5 class="card-header">Personel Listesi</h5>
+    <div class="card-body">
+
+        <table id="personellistele" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        E-POSTA ADRESİ
+                    </th>
+                    <th>PERSONEL GÖRSELİ</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Yetki)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AdSoyad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TCNO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departman)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Gorev)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.TelNo)
+                    </th>
+
+                    <th>AKSİYON</th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.PozisyonAciklama)
+                    </th>*@
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="mailto:@item.Eposta">@item.Eposta</a>
+
+                        </td>
+                        <td><img src="@item.PersonelGörsel" style="width:50px; height:50px;" class="rounded-circle" /></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Yetki)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdSoyad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TCNO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Departman)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gorev)
+                        </td>
+
+                        <td>
+                            <a href="tel:@item.TelNo">@item.TelNo</a>
+
+                        </td>
+
+                        <td>
+                            <a href="/PersonelBilgileris/Edit/@item.PersonelBilgileriId" class="btn btn-success"> <span class="tf-icons bx bx-edit"></span></a>
+                            <a href="/PersonelBilgileris/Details/@item.PersonelBilgileriId" class="btn btn-primary"><span class="tf-icons bx bx-detail"></span></a>
+                            <a href="/PersonelBilgileris/Delete/@item.PersonelBilgileriId" class="btn btn-danger" style="position:absolute"><span class="tf-icons bx bx-trash"></span></a>
+                            @*<a href="/PersonelBilgileris/HareketFöyü/@item.PersonelBilgileriId" class="btn btn-warning"><span class="tf-icons bx bx-history"></span></a>*@
+
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.PozisyonAciklama)
+                        </td>*@
+                    </tr>
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $('#personellistele').DataTable({
+        language: {
+            info: "_TOTAL_ kayıttan _START_ - _END_ kayıt gösteriliyor.",
+            infoEmpty: "Gösterilecek hiç kayıt yok.",
+            loadingRecords: "Kayıtlar yükleniyor.",
+            zeroRecords: "Tablo boş",
+            search: "Arama:",
+            infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+            buttons: {
+                copyTitle: "Panoya kopyalandı.",
+                copySuccess: "Panoya %d satır kopyalandı",
+                copy: "Kopyala",
+                print: "Yazdır",
+            },
+
+            paginate: {
+                first: "İlk",
+                previous: "Önceki",
+                next: "Sonraki",
+                last: "Son"
+            },
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel', 'pdf', 'print'
+        ],
+        responsive: true
+    });
+</script>
