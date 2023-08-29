@@ -23,7 +23,7 @@ namespace ProjeTakipWebApp.Controllers
             {
                 FormsAuthentication.SetAuthCookie(bilgiler.AdSoyad, false);
                 Session["Kullanici"] = bilgiler.AdSoyad.ToString();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
